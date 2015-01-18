@@ -1,1 +1,1 @@
-A handy PHP class to generate Stamps.com shipping labels
+A handy-dandy PHP class to generate Stamps.com shipping labels
