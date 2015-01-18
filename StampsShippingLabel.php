@@ -1,14 +1,13 @@
 <?php
 namespace Stamps;
-
 /**
- * Class to generate stamps.com shipping labels
+ * Class to generate Stamps.com shipping labels.
  * @author Victor Lantigua
  * 
  * Example usage:
  * 
- *		$fromAddress = new Address("axl rose", "2800 Biscayne Blvd STE 200", "", "Miami", "FL", "33137");
- *		$toAddress = new Address("slash", "1419 Westwood Blvd", "", "Los Angeles", "CA", "90210");
+ *		$fromAddress = new \Stamps\Address("Lebron James", "1 Center Court", "", "Cleveland", "OH", "44115");
+ *		$toAddress = new \Stamps\Address("Dwayne Wade", "601 Biscayne Boulevard", "", "Miami", "FL", "33132");
  *
  * 		$result = \Stamps\API::factory()
  *			->setFromAddress($fromAddress)
@@ -17,39 +16,6 @@ namespace Stamps;
  *			->saveToPdf(/gvs/sites/blackllama/2/pdfs/shippinglabels/mylabel.pdf);
  * 
  */
-
-class Address
-{
-	public $name;
-	public $address1;
-	public $address2;
-	public $city;
-	public $state;
-	public $zip;
-	public $country;
-	
-	/**
-	 * Constructor
-	 * 
-	 * @param string $name
-	 * @param string $address
-	 * @param string $city
-	 * @param string $state
-	 * @param string $zip
-	 * @param string $country
-	 */
-	public function __construct($name, $address1, $address2, $city, $state, $zip, $country = 'US')
-	{
-		$this->name		= strtoupper($name);
-		$this->address1	= strtoupper($address1);
-		$this->address2	= strtoupper($address2);
-		$this->city		= strtoupper($city);
-		$this->state	= strtoupper($state);
-		$this->zip		= $zip;
-		$this->country	= $country;
-	}
-}
-
 class ApiClient {
     const API_URL				= 'https://swsim.stamps.com/swsim/swsimv35.asmx?WSDL';
 	const API_INTEGRATION_ID	= 'YOUR_API_INTEGRATION_ID';
