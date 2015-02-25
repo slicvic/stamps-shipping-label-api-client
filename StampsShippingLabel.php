@@ -15,10 +15,10 @@ namespace Stamps;
  * 			->saveToPdf(/gvs/sites/blackllama/2/pdfs/shippinglabels/mylabel.pdf);
  */
 class ApiClient {
-	const API_URL = 'https://swsim.stamps.com/swsim/swsimv35.asmx?WSDL';
-	const API_INTEGRATION_ID = 'YOUR_API_INTEGRATION_ID';
-	const API_USERID = 'YOUR_API_USERID';
-	const API_PASSWORD = 'YOUR_API_PASSWORD';
+	const API_URL 				= 'https://swsim.stamps.com/swsim/swsimv35.asmx?WSDL';
+	const API_INTEGRATION_ID 	= 'YOUR_API_INTEGRATION_ID';
+	const API_USERID 			= 'YOUR_API_USERID';
+	const API_PASSWORD 			= 'YOUR_API_PASSWORD';
 
 	const SERVICE_TYPE_PRIORITY = 'US-PM';
 	const SERVICE_TYPE_FC 		= 'US-FC';
@@ -26,15 +26,15 @@ class ApiClient {
 	const IMAGE_TYPE_PDF = 'Png';
 	const IMAGE_TYPE_PNG = 'Pdf';
 
-	const PACKAGE_TYPE_LARGE_ENVELOPE_OR_FLAT = 'Large Envelope or Flat';
-	const PACKAGE_TYPE_THICK_ENVELOPE = 'Thick Envelope';
-	const PACKAGE_TYPE_PACKAGE = 'Package';
-	const PACKAGE_TYPE_FLAT_RATE_BOX = 'Flat Rate Box';
-	const PACKAGE_TYPE_SMALL_FLAT_RATE_BOX = 'Small Flat Rate Box';
-	const PACKAGE_TYPE_LARGE_FLAT_RATE_BOX = 'Large Flat Rate Box';
-	const PACKAGE_TYPE_FLAT_RATE_ENVELOPE = 'Flat Rate Envelope';
-	const PACKAGE_TYPE_LARGE_PACKAGE = 'Large Package';
-	const PACKAGE_TYPE_OVERSIZE_PACKAGE = 'Oversize Package';
+	const PACKAGE_TYPE_LARGE_ENVELOPE_OR_FLAT 	= 'Large Envelope or Flat';
+	const PACKAGE_TYPE_THICK_ENVELOPE 			= 'Thick Envelope';
+	const PACKAGE_TYPE_PACKAGE 					= 'Package';
+	const PACKAGE_TYPE_FLAT_RATE_BOX 			= 'Flat Rate Box';
+	const PACKAGE_TYPE_SMALL_FLAT_RATE_BOX 		= 'Small Flat Rate Box';
+	const PACKAGE_TYPE_LARGE_FLAT_RATE_BOX 		= 'Large Flat Rate Box';
+	const PACKAGE_TYPE_FLAT_RATE_ENVELOPE 		= 'Flat Rate Envelope';
+	const PACKAGE_TYPE_LARGE_PACKAGE 			= 'Large Package';
+	const PACKAGE_TYPE_OVERSIZE_PACKAGE 		= 'Oversize Package';
 
 	/**
 	 * If true, generates a sample label without real value.
