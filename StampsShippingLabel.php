@@ -3,97 +3,98 @@ namespace Stamps;
 /**
  * Class to generate Stamps.com shipping labels.
  * @author Victor Lantigua
- * 
- * Example usage:
- * 
+ *
+ * Usage:
  *		$fromAddress = new \Stamps\Address("Lebron James", "1 Center Court", "", "Cleveland", "OH", "44115");
  *		$toAddress = new \Stamps\Address("Dwayne Wade", "601 Biscayne Boulevard", "", "Miami", "FL", "33132");
  *
  * 		$result = \Stamps\API::factory()
- *			->setFromAddress($fromAddress)
- *			->setToAddress($toAddress)
- *			->setSampleOnly(FALSE)
- *			->saveToPdf(/gvs/sites/blackllama/2/pdfs/shippinglabels/mylabel.pdf);
- * 
+ * 			->setFromAddress($fromAddress)
+ * 			->setToAddress($toAddress)
+ * 			->setSampleOnly(FALSE)
+ * 			->saveToPdf(/gvs/sites/blackllama/2/pdfs/shippinglabels/mylabel.pdf);
  */
 class ApiClient {
-    const API_URL				= 'https://swsim.stamps.com/swsim/swsimv35.asmx?WSDL';
-	const API_INTEGRATION_ID	= 'YOUR_API_INTEGRATION_ID';
-	const API_USERID			= 'YOUR_API_USERID';
-    const API_PASSWORD			= 'YOUR_API_PASSWORD';
-	
-	const SERVICE_TYPE_PRIORITY = 'US-PM';
-	const SERVICE_TYPE_FC		= 'US-FC';
+	const API_URL 				= 'https://swsim.stamps.com/swsim/swsimv35.asmx?WSDL';
+	const API_INTEGRATION_ID 	= 'YOUR_API_INTEGRATION_ID';
+	const API_USERID 			= 'YOUR_API_USERID';
+	const API_PASSWORD 			= 'YOUR_API_PASSWORD';
 
-    const IMAGE_TYPE_PDF = 'Png';
+	const SERVICE_TYPE_PRIORITY = 'US-PM';
+	const SERVICE_TYPE_FC 		= 'US-FC';
+
+	const IMAGE_TYPE_PDF = 'Png';
 	const IMAGE_TYPE_PNG = 'Pdf';
-    
-    const PACKAGE_TYPE_LARGE_ENVELOPE_OR_FLAT   = 'Large Envelope or Flat';
-	const PACKAGE_TYPE_THICK_ENVELOPE           = 'Thick Envelope';
-	const PACKAGE_TYPE_PACKAGE                  = 'Package';
-	const PACKAGE_TYPE_FLAT_RATE_BOX            = 'Flat Rate Box';
-	const PACKAGE_TYPE_SMALL_FLAT_RATE_BOX      = 'Small Flat Rate Box';
-	const PACKAGE_TYPE_LARGE_FLAT_RATE_BOX      = 'Large Flat Rate Box';
-	const PACKAGE_TYPE_FLAT_RATE_ENVELOPE       = 'Flat Rate Envelope';
-	const PACKAGE_TYPE_LARGE_PACKAGE            = 'Large Package';
-	const PACKAGE_TYPE_OVERSIZE_PACKAGE         = 'Oversize Package';
+
+	const PACKAGE_TYPE_LARGE_ENVELOPE_OR_FLAT 	= 'Large Envelope or Flat';
+	const PACKAGE_TYPE_THICK_ENVELOPE 			= 'Thick Envelope';
+	const PACKAGE_TYPE_PACKAGE 					= 'Package';
+	const PACKAGE_TYPE_FLAT_RATE_BOX 			= 'Flat Rate Box';
+	const PACKAGE_TYPE_SMALL_FLAT_RATE_BOX 		= 'Small Flat Rate Box';
+	const PACKAGE_TYPE_LARGE_FLAT_RATE_BOX 		= 'Large Flat Rate Box';
+	const PACKAGE_TYPE_FLAT_RATE_ENVELOPE 		= 'Flat Rate Envelope';
+	const PACKAGE_TYPE_LARGE_PACKAGE 			= 'Large Package';
+	const PACKAGE_TYPE_OVERSIZE_PACKAGE			= 'Oversize Package';
 
 	/**
-	 * If true, generates a sample label without real value. 
+	 * If true, generates a sample label without real value.
 	 * @var boolean
 	 */
 	private $_sampleOnly = TRUE;
-	
+
 	/**
 	 * The image type of shipping label
 	 * @var boolean
 	 */
 	private $_imageType	= 'Png';
-    
+
     /**
-     * The package type 
+     * The package type
      * @var string
      */
     private $_packageType = 'Thick Envelope';
-    
+
 	/**
 	 * Return adddress
-	 * @var Address 
+	 * @var Address
 	 */
 	private $_from;
 
 	/**
 	 * Destination address
-	 * @var Address 
+	 * @var Address
 	 */
 	private $_to;
-	
+
 	/**
-	 * The mail service type 
+	 * The mail service type
 	 * @var string
 	 */
 	private $_serviceType = 'US-FC';
-	
+
     /**
      * The weight of the package in ounces
-     * @var float 
+     * @var float
+     */
+    /**
+     * The weight of the package in ounces
+     * @var float
      */
     private $_weightOz = '0.0';
-    
+
     /**
-     * This is the date the package will be picked up or officially enter the mail system. 
+     * This is the date the package will be picked up or officially enter the mail system.
      * Defaults to the current date('Y-m-d')
-     * @var date 
+     * @var string
      */
     private $_shipDate = NULL;
-    
+
 	/**
 	 * SoapClient
-	 * 
-	 * @var SoapClient 
+	 * @var SoapClient
 	 */
 	private $_soapClient;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -101,18 +102,20 @@ class ApiClient {
 	{
 		$this->_soapClient = new SoapClient(self::API_URL);
 	}
-	
+
 	/**
-	 * Creates and returns a new instance
+	 * Creates and returns a new instance.
+	 *
 	 * @return StampsShippingLabel
 	 */
 	public static function factory()
 	{
 		return new ApiClient();
 	}
-	
+
 	/**
-     * Set return address
+	 * Sets return address.
+	 *
 	 * @param Address $from
 	 */
 	public function setFromAddress(Address $from)
@@ -120,19 +123,21 @@ class ApiClient {
 		$this->_from = $from;
 		return $this;
 	}
-	
+
 	/**
-     * Set destination address
-	 * @param Address $to
+	 * Sets destination address.
+	 *
+	 * @param Address
 	 */
 	public function setToAddress(Address $to)
 	{
 		$this->_to = $to;
 		return $this;
 	}
-	
+
 	/**
-     * Set sample only
+	 * Sets sample only flag.
+	 *
 	 * @param boolean $isSampleOnly
 	 */
 	public function setSampleOnly($isSampleOnly)
@@ -140,9 +145,10 @@ class ApiClient {
 		$this->_sampleOnly = $isSampleOnly;
 		return $this;
 	}
-    
-    /**
-     * Set the image type of the shipping label
+
+	/**
+	 * Sets the image type of the shipping label.
+	 *
 	 * @param string $type
 	 */
 	public function setImageType($type)
@@ -150,9 +156,10 @@ class ApiClient {
 		$this->_imageType = $type;
 		return $this;
 	}
-    
-    /**
-     * Set the package type
+
+	/**
+	 * Sets the package type.
+	 *
 	 * @param string $type
 	 */
 	public function setPackageType($type)
@@ -160,9 +167,10 @@ class ApiClient {
 		$this->_packageType = $type;
 		return $this;
 	}
-    
-    /**
-     * Set weight of the package
+
+	/**
+	 * Sets weight of the package.
+	 *
 	 * @param float $ounces the weight in ounces
 	 */
 	public function setWeightOz($ounces)
@@ -170,9 +178,10 @@ class ApiClient {
 		$this->_weightOz = $ounces;
 		return $this;
 	}
-    
-    /**
-     * Set the date the package will be picked up or officially enter the mail system.
+
+	/**
+	 * Sets the date the package will be picked up or officially enter the mail system.
+	 *
 	 * @param date $date
 	 */
 	public function setShipDate($date)
@@ -182,17 +191,17 @@ class ApiClient {
 	}
 
 	/**
-	 * Saves label to a file
-	 * 
+	 * Saves label to a file.
+	 *
 	 * @param string $filename the destination path
 	 * @return boolean
 	 */
 	public function save($filename)
 	{
-		try 
+		try
 		{
 			$result = $this->_doCreateLabelRequest();
-			
+
 			$ch = curl_init($result->URL);
 			$fp = fopen($filename, 'wb');
 			curl_setopt($ch, CURLOPT_FILE, $fp);
@@ -200,28 +209,29 @@ class ApiClient {
 			curl_exec($ch);
 			curl_close($ch);
 			fclose($fp);
-			
+
 			return $result->URL;
-		} 
-		catch (SoapFault $ex) 
+		}
+		catch (SoapFault $ex)
 		{
 			var_dump($ex);
 			return FALSE;
 		}
 	}
-	
+
 	/**
-	 * 
+	 * Performs requests to create label.
+	 *
 	 * @return SoapFault|stdClass
 	 */
 	private function _doCreateLabelRequest()
 	{
 		// 1. Check Available Balance
-			
+
 		$accountInfoResponse = $this->_soapClient->GetAccountInfo(array(
 			'Authenticator' => $this->_doAuthRequest()
 		));
-		
+
 		/*$purchasePostageResponse = $this->_soapClient->PurchasePostage(array(
 			'Authenticator' => $this->_doAuthRequest(),
 			'PurchaseAmount' => 20,
@@ -246,7 +256,7 @@ class ApiClient {
 				'City'		=> $this->_to->city,
 				'State'		=> $this->_to->state,
 				'ZIPcode'	=> $this->_to->zip
-			)	
+			)
 		));
 
 		if ($cleanseToAddressResponse->CityStateZipOK == FALSE)
@@ -255,7 +265,7 @@ class ApiClient {
 		}
 
 		// 3. Get Rates
-		
+
 		$rateOptions = array(
 			'FromZIPCode'	=> $this->_from->zip,
 			'ToZIPCode'		=> $this->_to->zip,
@@ -272,22 +282,22 @@ class ApiClient {
 				)
 			)
 		);
-		
+
 		$rates = $this->_soapClient->GetRates(array(
 			'Authenticator' => $this->_doAuthRequest(),
 			'Rate'			=> $rateOptions
 		));
-		
+
 		$rateOptions['Rate']['Amount'] = $rates->Rates->Rate->Amount;
-		
+
 		// 4. Generate Label
-				
+
 		$labelOptions = array(
 			'Authenticator'		=> $this->_doAuthRequest(),
 			'IntegratorTxID'    => time(),
 			'SampleOnly'		=> $this->_sampleOnly,
 			'ImageType'			=> $this->_imageType,
-			
+
 			'Rate'				=> $rateOptions,
 
 			'From' => array(
@@ -298,7 +308,7 @@ class ApiClient {
 				'State'			=> $this->_from->state,
 				'ZIPCode'		=> $this->_from->zip
 			),
-			
+
 			'To' => array(
 				'FullName'		=> $this->_to->name,
 				'Address1'		=> $this->_to->address1,
@@ -308,14 +318,15 @@ class ApiClient {
 				'ZIPCode'		=> $this->_to->zip
 			)
 		);
-		
-		$indiciumResponse = $this->_soapClient->CreateIndicium($labelOptions);	
-		
+
+		$indiciumResponse = $this->_soapClient->CreateIndicium($labelOptions);
+
 		return $indiciumResponse;
 	}
-	
+
 	/**
-	 * Returns auth token for API requests
+	 * Gets the auth token for API requests.
+	 *
 	 * @return string
 	 */
 	private function _doAuthRequest()
@@ -328,6 +339,6 @@ class ApiClient {
 			)
 		));
 
-		return $response->Authenticator;	
+		return $response->Authenticator;
 	}
 }
