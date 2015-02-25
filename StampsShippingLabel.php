@@ -48,11 +48,11 @@ class ApiClient {
 	 */
 	private $_imageType	= 'Png';
 
-    /**
-     * The package type
-     * @var string
-     */
-    private $_packageType = 'Thick Envelope';
+	/**
+	 * The package type
+	 * @var string
+	 */
+	private $_packageType = 'Thick Envelope';
 
 	/**
 	 * Return adddress
@@ -72,22 +72,22 @@ class ApiClient {
 	 */
 	private $_serviceType = 'US-FC';
 
-    /**
-     * The weight of the package in ounces
-     * @var float
-     */
-    /**
-     * The weight of the package in ounces
-     * @var float
-     */
-    private $_weightOz = '0.0';
+	/**
+	 * The weight of the package in ounces
+	 * @var float
+	 */
+	/**
+	 * The weight of the package in ounces
+	 * @var float
+	 */
+	private $_weightOz = '0.0';
 
-    /**
-     * This is the date the package will be picked up or officially enter the mail system.
-     * Defaults to the current date('Y-m-d')
-     * @var string
-     */
-    private $_shipDate = NULL;
+	/**
+	 * This is the date the package will be picked up or officially enter the mail system.
+	 * Defaults to the current date('Y-m-d')
+	 * @var string
+	 */
+	private $_shipDate = NULL;
 
 	/**
 	 * SoapClient
@@ -250,12 +250,12 @@ class ApiClient {
 		$cleanseToAddressResponse = $this->_soapClient->CleanseAddress(array(
 			'Authenticator' => $this->_doAuthRequest(),
 			'Address' => array(
-				'FullName'	=> $this->_to->name,
-				'Address1'	=> $this->_to->address1,
-				'Address2'	=> $this->_to->address2,
+				'FullName' 	=> $this->_to->name,
+				'Address1' 	=> $this->_to->address1,
+				'Address2' 	=> $this->_to->address2,
 				'City'		=> $this->_to->city,
-				'State'		=> $this->_to->state,
-				'ZIPcode'	=> $this->_to->zip
+				'State' 	=> $this->_to->state,
+				'ZIPcode' 	=> $this->_to->zip
 			)
 		));
 
@@ -267,15 +267,15 @@ class ApiClient {
 		// 3. Get Rates
 
 		$rateOptions = array(
-			'FromZIPCode'	=> $this->_from->zip,
-			'ToZIPCode'		=> $this->_to->zip,
-			'WeightOz'		=> $this->_weightOz,
-			'WeightLb'		=> '0.0',
-			'ShipDate'		=> (empty($this->_shipDate) ? date('Y-m-d') : $this->_shipDate),
+			'FromZIPCode' 	=> $this->_from->zip,
+			'ToZIPCode' 	=> $this->_to->zip,
+			'WeightOz' 		=> $this->_weightOz,
+			'WeightLb' 		=> '0.0',
+			'ShipDate' 		=> (empty($this->_shipDate) ? date('Y-m-d') : $this->_shipDate),
 
-			'ServiceType'	=> $this->_serviceType,
-			'PackageType'	=> $this->_packageType,
-			'InsuredValue'	=> '0.0',
+			'ServiceType' 	=> $this->_serviceType,
+			'PackageType' 	=> $this->_packageType,
+			'InsuredValue' 	=> '0.0',
 			'AddOns' => array(
 				array(
 					'AddOnType' => 'SC-A-HP' // Hide price on label
@@ -285,7 +285,7 @@ class ApiClient {
 
 		$rates = $this->_soapClient->GetRates(array(
 			'Authenticator' => $this->_doAuthRequest(),
-			'Rate'			=> $rateOptions
+			'Rate' 			=> $rateOptions
 		));
 
 		$rateOptions['Rate']['Amount'] = $rates->Rates->Rate->Amount;
@@ -293,28 +293,28 @@ class ApiClient {
 		// 4. Generate Label
 
 		$labelOptions = array(
-			'Authenticator'		=> $this->_doAuthRequest(),
-			'IntegratorTxID'    => time(),
-			'SampleOnly'		=> $this->_sampleOnly,
-			'ImageType'			=> $this->_imageType,
+			'Authenticator' 	=> $this->_doAuthRequest(),
+			'IntegratorTxID' 	=> time(),
+			'SampleOnly' 		=> $this->_sampleOnly,
+			'ImageType' 		=> $this->_imageType,
 
-			'Rate'				=> $rateOptions,
+			'Rate' 				=> $rateOptions,
 
 			'From' => array(
-				'FullName'		=> $this->_from->name,
-				'Address1'		=> $this->_from->address1,
-				'Address2'		=> $this->_from->address2,
-				'City'			=> $this->_from->city,
-				'State'			=> $this->_from->state,
-				'ZIPCode'		=> $this->_from->zip
+				'FullName' 		=> $this->_from->name,
+				'Address1' 		=> $this->_from->address1,
+				'Address2' 		=> $this->_from->address2,
+				'City' 			=> $this->_from->city,
+				'State' 		=> $this->_from->state,
+				'ZIPCode' 		=> $this->_from->zip
 			),
 
 			'To' => array(
-				'FullName'		=> $this->_to->name,
-				'Address1'		=> $this->_to->address1,
+				'FullName' 		=> $this->_to->name,
+				'Address1' 		=> $this->_to->address1,
 				'Address2'		=> $this->_to->address2,
-				'City'			=> $this->_to->city,
-				'State'			=> $this->_to->state,
+				'City' 			=> $this->_to->city,
+				'State' 		=> $this->_to->state,
 				'ZIPCode'		=> $this->_to->zip
 			)
 		);
@@ -334,8 +334,8 @@ class ApiClient {
 		$response = $this->_soapClient->AuthenticateUser(array(
 			'Credentials' => array(
 				'IntegrationID' => self::API_INTEGRATION_ID,
-				'Username'		=> self::API_USERID,
-				'Password'		=> self::API_PASSWORD
+				'Username' 		=> self::API_USERID,
+				'Password' 		=> self::API_PASSWORD
 			)
 		));
 
