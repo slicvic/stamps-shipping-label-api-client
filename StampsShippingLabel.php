@@ -76,10 +76,6 @@ class ApiClient {
 	 * The weight of the package in ounces
 	 * @var float
 	 */
-	/**
-	 * The weight of the package in ounces
-	 * @var float
-	 */
 	private $_weightOz = '0.0';
 
 	/**
@@ -267,15 +263,15 @@ class ApiClient {
 		// 3. Get Rates
 
 		$rateOptions = array(
-			'FromZIPCode' 	=> $this->_from->zip,
-			'ToZIPCode' 	=> $this->_to->zip,
-			'WeightOz' 		=> $this->_weightOz,
-			'WeightLb' 		=> '0.0',
-			'ShipDate' 		=> (empty($this->_shipDate) ? date('Y-m-d') : $this->_shipDate),
+			'FromZIPCode'		=> $this->_from->zip,
+			'ToZIPCode' 		=> $this->_to->zip,
+			'WeightOz'			=> $this->_weightOz,
+			'WeightLb'			=> '0.0',
+			'ShipDate'			=> (empty($this->_shipDate) ? date('Y-m-d') : $this->_shipDate),
 
-			'ServiceType' 	=> $this->_serviceType,
-			'PackageType' 	=> $this->_packageType,
-			'InsuredValue' 	=> '0.0',
+			'ServiceType'		=> $this->_serviceType,
+			'PackageType' 		=> $this->_packageType,
+			'InsuredValue' 		=> '0.0',
 			'AddOns' => array(
 				array(
 					'AddOnType' => 'SC-A-HP' // Hide price on label
