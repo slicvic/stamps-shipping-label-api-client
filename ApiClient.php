@@ -241,11 +241,13 @@ class ApiClient {
             'Authenticator' => $this->doAuthRequest()
         ));
 
-        /*$purchasePostageResponse = $this->soapClient->PurchasePostage(array(
+        /*
+        $purchasePostageResponse = $this->soapClient->PurchasePostage(array(
             'Authenticator' => $this->doAuthRequest(),
             'PurchaseAmount' => 20,
             'ControlTotal'  => $accountInfoResponse->AccountInfo->PostageBalance->
-        ));*/
+        ));
+        */
 
         $availableBalance = (double)$accountInfoResponse->AccountInfo->PostageBalance->AvailablePostage;
 
