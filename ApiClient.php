@@ -17,7 +17,7 @@ use Address;
  *          ->setFromAddress($fromAddress)
  *          ->setToAddress($toAddress)
  *          ->setSampleOnly(FALSE)
- *          ->saveToPdf(/gvs/sites/blackllama/2/pdfs/shippinglabels/mylabel.pdf);
+ *          ->saveToPdf(/Users/slicvic/Development/sample-label.pdf);
  */
 class ApiClient {
 
