@@ -24,7 +24,7 @@ $from = (new \Slicvic\Stamps\Address\Address)
     ->setCountry('US');
 
 try {
-    $labelUrl = (new \Slicvic\Stamps\Api\ShippingLabel)
+    $shippingLabel = (new \Slicvic\Stamps\Api\ShippingLabel)
         ->setApiUrl('API_URL') // Leave out for default
         ->setApiIntegrationId('YOUR_API_INTEGRATION_ID')
         ->setApiUserId('YOUR_API_USER_ID')
@@ -37,10 +37,12 @@ try {
         ->setIsSampleOnly(false)
         ->setWeightOz(100)
         ->setShipDate('2018-01-17')
-        ->setShowPrice(false)
-        ->create(); // Takes an optional filename argument to save label to file
+        ->setShowPrice(false);
+
+    // Generate label and get URL to the PDF or PNG
+    // Takes an optional filename argument to save label to file
+    $labelUrl = $shippingLabel->create();
 } catch(Exception $e) {
     // Handle exception
 }
-
 ```
