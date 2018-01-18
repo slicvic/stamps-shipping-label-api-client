@@ -1,0 +1,22 @@
+{
+    "name": "slicvic/stamps-shipping-label-api-client",
+    "description": "A handy-dandy Stamps.com API integration to generate shipping labels.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Victor Lantigua",
+            "email": "vmlantigua@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Slicvic\\Stamps\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Slicvic\\Stamps\\": "tests/"
+        }
+    }
+}
