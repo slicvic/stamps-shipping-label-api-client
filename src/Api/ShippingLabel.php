@@ -6,7 +6,7 @@ use Exception as ApiException;
 use Slicvic\Stamps\Address\AddressInterface;
 
 /**
- * Class to generate shipping labels.
+ * Client to generate shipping labels.
  */
 class ShippingLabel extends AbstractClient implements ShippingLabelInterface
 {

@@ -5,7 +5,7 @@ namespace Slicvic\Stamps\Api;
 use Slicvic\Stamps\Address\AddressInterface;
 
 /**
- * Interface to generate shipping labels.
+ * Client interface to generate shipping labels.
  */
 interface ShippingLabelInterface
 {

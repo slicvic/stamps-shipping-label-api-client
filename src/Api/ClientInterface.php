@@ -3,7 +3,7 @@
 namespace Slicvic\Stamps\Api;
 
 /**
- * Interface for base API client.
+ * Base interface for API clients.
  */
 interface ClientInterface
 {
@@ -45,7 +45,7 @@ interface ClientInterface
      * @return $this
      */
     public function setApiPassword($password);
-    
+
     /**
      * @return string
      */
