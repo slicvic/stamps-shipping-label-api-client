@@ -3,7 +3,7 @@
 namespace Slicvic\Stamps\Address;
 
 /**
- * Class to represent mailing address for a shipping label.
+ * Class to represent a mailing address for a shipping label.
  */
 class Address implements AddressInterface
 {

@@ -5,9 +5,8 @@ namespace Slicvic\Stamps\Api;
 use Exception as ApiException;
 use Slicvic\Stamps\Address\AddressInterface;
 
-
 /**
- * Shipping label API client.
+ * Class to generate shipping labels.
  */
 class ShippingLabel extends AbstractClient implements ShippingLabelInterface
 {

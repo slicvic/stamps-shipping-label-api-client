@@ -5,7 +5,7 @@ namespace Slicvic\Stamps\Api;
 use \SoapClient;
 
 /**
- * Base class for API clients.
+ * Base class for any API client.
  */
 abstract class AbstractClient implements ClientInterface
 {
